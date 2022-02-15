@@ -547,9 +547,7 @@ Tomcat是绿色版,直接解压即可
 
 ### 3.3 Maven创建Web项目
 
-介绍完Tomcat的基本使用后，我们来学习在IDEA中如何创建Maven Web项目，学习这种方式的原因是以后Tomcat中运行的绝大多数都是Web项目，而使用Maven工具能更加简单快捷的把Web项目给创建出来，所以Maven的Web项目具体如何来构建呢?
-
-在真正创建Maven Web项目之前，我们先要知道Web项目长什么样子，具体的结构是什么?
+介绍完Tomcat的基本使用后，我们来学习在IDEA中如何创建Maven Web项目，学习这种方式的原因是以后Tomcat中运行的绝大多数都是Web项目，而使用Maven工具能更加简单快捷的把Web项目给创建出来。
 
 #### 3.3.1 Web项目结构
 
@@ -627,25 +625,9 @@ Web项目的结构分为:开发中的项目和开发完可以部署的Web项目,
 
 7. 补充完后，最终的项目结构如下:
 
-    
-
-    
-
-   ![1627229478030](images/1627229478030-164406993760245.png)
+  ![1627229478030](images/1627229478030-164406993760245.png)
 
 上述两种方式，创建的web项目，都不是很全，需要手动补充内容，至于最终采用哪种方式来创建Maven Web项目，都是可以的，根据各自的喜好来选择使用即可。
-
-**小结**
-
-1.掌握Maven Web项目的目录结构
-
-2.掌握使用骨架的方式创建Maven Web项目
-
-![1627204022604](images/1627204022604-164406993760246.png)
-
-> 3.掌握不使用骨架的方式创建Maven Web项目
-
-![1627204076090](images/1627204076090-164406993760247.png)
 
 ### 3.4 IDEA使用Tomcat
 
@@ -718,6 +700,10 @@ Web项目的结构分为:开发中的项目和开发完可以部署的Web项目,
                <groupId>org.apache.tomcat.maven</groupId>
                <artifactId>tomcat7-maven-plugin</artifactId>
                <version>2.2</version>
+               <configuration>
+             		<!-- <port>80</port> -->
+             		<!-- <path>/</path> -->
+           		</configuration>
            </plugin>
        </plugins>
    </build>
@@ -758,8 +744,7 @@ Web项目的结构分为:开发中的项目和开发完可以部署的Web项目,
 						答案: http://localhost:80/hello/a.html
 			-->
             </configuration>
-          
-          
+
         </plugin>
     </plugins>
 </build>
