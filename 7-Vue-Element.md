@@ -600,11 +600,11 @@ new Vue({
 
 页面操作效果如下：
 
-<img src="C:\Users\Joker_Monster\Desktop\Java笔记\JavaWeb_Note\images\image-20210831163001830-164491705053120.png" alt="image-20210831163001830" style="zoom:80%;" />
+![image-20220216154006268](images/image-20220216154006268.png)
 
 整体流程如下
 
-<img src="C:\Users\Joker_Monster\Desktop\Java笔记\JavaWeb_Note\images\image-20210831163035298-164491705262521.png" alt="image-20210831163035298" style="zoom:70%;" />
+![image-20220216154015073](images/image-20220216154015073.png)
 
 > ==注意：前端代码的关键点在于使用 `v-model` 指令给标签项绑定模型数据，利用双向绑定特性，在发送异步请求时提交数据。==
 
@@ -740,7 +740,7 @@ Element 提供了很多组件（组成网页的部件）供我们使用。例如
 
 如下图左边的是我们编写页面看到的按钮，上图右边的是 Element 提供的页面效果，效果一目了然。
 
-<img src="C:\Users\Joker_Monster\Desktop\Java笔记\JavaWeb_Note\images\image-20210831170943892-164491705797122.png" alt="image-20210831170943892" style="zoom:80%;" />
+<img src="images/image-20210831170943892-16449972786301.png" alt="image-20210831170943892" style="zoom:80%;" />
 
 我们学习 Element 其实就是学习怎么从官网拷贝组件到我们自己的页面并进行修改，官网网址是
 
@@ -750,29 +750,29 @@ https://element.eleme.cn/#/zh-CN
 
 进入官网能看到如下页面
 
-![image-20210831171456559](C:\Users\Joker_Monster\Desktop\Java笔记\JavaWeb_Note\images\image-20210831171456559-164491706059123.png)
+![image-20210831171456559](images/image-20210831171456559-16449972786303.png)
 
 接下来直接点击 `组件` ，页面如下
 
-![image-20210831171552844](../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831171552844.png)
+![image-20210831171552844](images/image-20210831171552844-16449972786302.png)
 
 ### 2.1  快速入门
 
 1. 将资源 `04-资料\02-element` 下的 `element-ui` 文件夹直接拷贝到项目的 `webapp` 下。目录结构如下
 
-   <img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831171856768.png" alt="image-20210831171856768" style="zoom:80%;" />
+   <img src="images/image-20210831171856768-16449972786304.png" alt="image-20210831171856768" style="zoom:80%;" />
 
 2. 创建页面，并在页面引入Element 的css、js文件 和 Vue.js
 
    ```html
-     <script src="vue.js"></script>
-     <script src="element-ui/lib/index.js"></script>
-     <link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+   <script src="js/vue.js"></script>
+   <script src="element-ui/lib/index.js"></script>
+   <link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
    ```
 
 3. .创建Vue核心对象
 
-   Element 是基于 Vue 的，所以使用Element时必须要创建 Vue 对象.后面所有的Element相关的东西均写在Vue的管理范围内就行
+   Element 是基于 Vue 的，所以使用Element时必须要创建 Vue 对象
 
    ```html
    <script>
@@ -784,7 +784,7 @@ https://element.eleme.cn/#/zh-CN
 
 4. 官网复制Element组件代码
 
-   <img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831180730287.png" alt="image-20210831180730287" style="zoom:70%;" />
+   <img src="images/image-20210831180730287-16449972786305.png" alt="image-20210831180730287" style="zoom:70%;" />
 
    在左菜单栏找到 `Button 按钮` ，然后找到自己喜欢的按钮样式，点击 `显示代码` ，在下面就会展示出对应的代码，将这些代码拷贝到我们自己的页面即可。
 
@@ -862,7 +862,7 @@ Element 提供了两种布局方式，分别是：
 
 通过基础的 24 分栏，迅速简便地创建布局。也就是默认将一行分为 24 栏，根据页面要求给每一列设置所占的栏数。
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831182349672.png" alt="image-20210831182349672" style="zoom:70%;" />
+<img src="images/image-20210831182349672-16449972786316.png" alt="image-20210831182349672" style="zoom:70%;" />
 
 在左菜单栏找到 `Layout 布局` ，然后找到自己喜欢的按钮样式，点击 `显示代码` ，在下面就会展示出对应的代码，显示出的代码中有样式，有html标签。将样式拷贝我们自己页面的 `head` 标签内，将html标签拷贝到  `<div id="app"></div>` 标签内。
 
@@ -967,7 +967,7 @@ Element 提供了两种布局方式，分别是：
 
 如下图是官网提供的 Container 布局容器实例：
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831183433892.png" alt="image-20210831183433892" style="zoom:70%;" />
+<img src="images/image-20210831183433892-16449972786319.png" alt="image-20210831183433892" style="zoom:70%;" />
 
 该效果代码中包含了样式、页面标签、模型数据。将里面的样式 `<style>` 拷贝到我们自己页面的 `head` 标签中；将html标签拷贝到 `<div id="app"></div>` 标签中，再将数据模型拷贝到 `vue` 对象的 `data()` 中。
 
@@ -1092,15 +1092,15 @@ Element 提供了两种布局方式，分别是：
 
 我们要完成如下页面效果
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831185223141.png" alt="image-20210831185223141" style="zoom:80%;" />
+<img src="images/image-20210831185223141-16449972786317.png" alt="image-20210831185223141" style="zoom:80%;" />
 
 要完成该页面，我们需要先对这个页面进行分析，看页面由哪儿几部分组成，然后到官网进行拷贝并修改。页面总共有如下组成部分
 
-![image-20210831185505106](../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831185505106.png)
+![image-20210831185505106](images/image-20210831185505106-16449972786318.png)
 
 还有一个是当我们点击 `新增` 按钮，会在页面正中间弹出一个对话框，如下
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831185612905.png" alt="image-20210831185612905" style="zoom:60%;" />
+<img src="images/image-20210831185612905-164499727863110.png" alt="image-20210831185612905" style="zoom:60%;" />
 
 #### 2.3.1  准备基本页面
 
@@ -1135,25 +1135,25 @@ Element 提供了两种布局方式，分别是：
 
 ##### 2.3.2.1  拷贝
 
-![image-20210831185937618](../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831185937618.png)
+![image-20210831185937618](images/image-20210831185937618-164499727863111.png)
 
 在左菜单栏找到 `Table 表格`并点击，右边主体就会定位到表格这一块，找到我们需要的表格效果（如上图），点击 `显示代码` 就可以看到这个表格的代码了。
 
 将html标签拷贝到 `<div id="app"></div>` 中，如下：
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831190328825.png" alt="image-20210831190328825" style="zoom:80%;" />
+<img src="images/image-20210831190328825-164499727863112.png" alt="image-20210831190328825" style="zoom:80%;" />
 
 将css样式拷贝到我们页面的 `head` 标签中，如下
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831190419248.png" alt="image-20210831190419248" style="zoom:80%;" />
+<img src="images/image-20210831190419248-164499727863113.png" alt="image-20210831190419248" style="zoom:80%;" />
 
 将方法和模型数据拷贝到 Vue 对象指定的位置
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831190534720.png" alt="image-20210831190534720" style="zoom:80%;" />
+<img src="images/image-20210831190534720-164499727863114.png" alt="image-20210831190534720" style="zoom:80%;" />
 
 拷贝完成后通过浏览器打开可以看到表格的效果
 
-![image-20210831191234876](../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831191234876.png)
+![image-20210831191234876](images/image-20210831191234876-164499727863115.png)
 
 表格效果出来了，但是显示的表头和数据并不是我们想要的，所以接下来就需要对页面代码进行修改了。
 
@@ -1163,33 +1163,39 @@ Element 提供了两种布局方式，分别是：
 
    下面是对表格代码进行分析的图解。根据下图说明修改自己的列数和列名
 
-   <img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831192032118.png" alt="image-20210831192032118" style="zoom:70%;" />
+   <img src="images/image-20210831192032118-164499727863117.png" alt="image-20210831192032118" style="zoom:70%;" />
 
    修改完页面后，还需要对绑定的模型数据进行修改，下图是对模型数据进行分析的图解
 
-   <img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831192429806.png" alt="image-20210831192429806" style="zoom:70%;" />
+   <img src="images/image-20210831192429806-164499727863116.png" alt="image-20210831192429806" style="zoom:70%;" />
 
 2. **给表格添加操作列**
 
    从之前的表格拷贝一列出来并对其进行修改。按钮是从官网的 `Button 按钮` 组件中拷贝并修改的
 
-   <img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831192809304.png" alt="image-20210831192809304" style="zoom:70%;" />
+   <img src="images/image-20210831192809304-164499727863118.png" alt="image-20210831192809304" style="zoom:70%;" />
 
 3. **给表格添加复选框列和标号列**
 
    给表格添加复选框和标号列，效果如下
 
-   ![image-20210831193216143](../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831193216143.png)
+   ![image-20210831193216143](images/image-20210831193216143-164499727863119.png)
 
    此效果也是从 Element 官网进行拷贝，先找到对应的表格效果，然后将其对应代码拷贝到我们的代码中，如下是复选框列官网效果图和代码
 
-   ![image-20210831193601788](../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831193601788.png)
+   ![image-20210831193601788](images/image-20210831193601788-164499727863120.png)
 
-   这里需要注意在 `<el-table>` 标签上有一个事件 `@selection-change="handleSelectionChange"` ，这里绑定的函数也需要从官网拷贝到我们自己的页面代码中，函数代码如下：
+   这里需要注意在 `<el-table>` 标签上有一个事件 `@selection-change="handleSelectionChange"` ，这个事件是复选框选择之后触发的。具体会传递什么数据呢，我们可以打印一下看看。
 
-   ![image-20210831194013986](../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831194013986.png)
+   <img src="images/image-20220216180423003.png" alt="image-20220216180423003" style="zoom:80%;" />
 
-   从该函数中又发现还需要一个模型数据 `multipleSelection ` ，所以还需要定义出该模型数据
+   这里绑定的函数也需要从官网拷贝到我们自己的页面代码中，函数代码如下：
+
+   ![image-20210831194013986](images/image-20210831194013986-164499727863121.png)
+
+   从该函数中又发现还需要一个模型数据 `multipleSelection ` ，所以还需要定义出该模型数据.
+
+   ![image-20220216180500593](images/image-20220216180500593.png)
 
 标号列也用同样的方式进行拷贝并修改。
 
@@ -1197,11 +1203,11 @@ Element 提供了两种布局方式，分别是：
 
 在 Element 官网找到横排的表单效果，然后拷贝代码并进行修改
 
-![image-20210831194300357](../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831194300357.png)
+![image-20210831194300357](images/image-20210831194300357-164499727863123.png)
 
 点击上面的 `显示代码` 后，就会展示出对应的代码，下面是对这部分代码进行分析的图解
 
-![image-20210831194835721](../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831194835721.png)
+![image-20210831194835721](images/image-20210831194835721-164499727863122.png)
 
 然后根据我们要的效果修改代码。
 
@@ -1209,7 +1215,7 @@ Element 提供了两种布局方式，分别是：
 
 从 Element 官网找具有着色效果的按钮，并将代码拷贝到我们自己的页面上
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831214602954.png" alt="image-20210831214602954" style="zoom:70%;" />
+<img src="images/image-20210831214602954-164499727863124.png" alt="image-20210831214602954" style="zoom:70%;" />
 
 
 
@@ -1217,42 +1223,48 @@ Element 提供了两种布局方式，分别是：
 
 在 Element 官网找对话框，如下：
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831214818516.png" alt="image-20210831214818516" style="zoom:70%;" />
+<img src="images/image-20210831214818516-164499727863125.png" alt="image-20210831214818516" style="zoom:70%;" />
 
 下面对官网提供的代码进行分析
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831215609729.png" alt="image-20210831215609729" style="zoom:80%;" />
+<img src="images/image-20210831215609729-164499727863126.png" alt="image-20210831215609729" style="zoom:80%;" />
 
 上图分析出来的模型数据需要在 Vue 对象中进行定义。
+
+其中在状态开关这里，我们要绑定选择的值与未选择的值，怎么搞呢，Element肯定早弄好了，我们往上找到Switch组件这里，那个扩展的 value 类型就是我们需要的。只需要在普通开关里面添加这两个属性就好了。
+
+<img src="images/image-20220216185159259.png" alt="image-20220216185159259" style="zoom:80%;" />
 
 #### 2.3.6  完成分页条展示
 
 在 Element 官网找到 `Pagination 分页` ，在页面主体部分找到我们需要的效果，如下
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831220034775.png" alt="image-20210831220034775" style="zoom:70%;" />
+<img src="images/image-20210831220034775-164499727863127.png" alt="image-20210831220034775" style="zoom:70%;" />
 
 点击 `显示代码` ，找到 `完整功能` 对应的代码，接下来对该代码进行分析
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831220446390.png" alt="image-20210831220446390" style="zoom:80%;" />
+<img src="images/image-20210831220446390-164499727863128.png" alt="image-20210831220446390" style="zoom:80%;" />
 
 上面代码属性说明：
 
-* `page-size` ：每页显示的条目数
+* `page-size` ：每页显示的条目数，==这里需要我们自己绑定数据模型，这个是要给后端的==
 
 * `page-sizes` ： 每页显示个数选择器的选项设置。
 
   `:page-sizes="[100,200,300,400]"`  对应的页面效果如下：
 
-  <img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831220820557.png" alt="image-20210831220820557" style="zoom:70%;" />
+  <img src="images/image-20210831220820557-164499727863129.png" alt="image-20210831220820557" style="zoom:70%;" />
 
-* `currentPage` ：当前页码。我们点击那个页码，此属性值就是几。
+* `current-Page` ：当前页码。我们点击那个页码，此属性值就是几。==绑定数据模型，给后端==
 
-* `total` ：总记录数。用来设置总的数据条目数，该属性设置后， Element 会自动计算出需分多少页并给我们展示对应的页码。
+* `total` ：总记录数。用来设置总的数据条目数，该属性设置后， Element 会自动计算出需分多少页并给我们展示对应的页码。==绑定数据模型，从后端得到该数据==
 
 事件说明：
 
 * `size-change` ：pageSize 改变时会触发。也就是当我们改变了每页显示的条目数后，该事件会触发。
 * `current-change` ：currentPage 改变时会触发。也就是当我们点击了其他的页码后，该事件会触发。
+
+其他的所有东西，我们不用关系，别人都给我们做好了的
 
 #### 2.3.7  完整页面代码
 
@@ -1479,3 +1491,4 @@ Element 提供了两种布局方式，分别是：
 </body>
 </html>
 ```
+
