@@ -10,31 +10,33 @@
 
 我们之前也学习过后端的框架 `Mybatis` ，`Mybatis` 是用来简化 `jdbc` 代码编写的；而 `VUE` 是前端的框架，是用来简化 `JavaScript` 代码编写的。前一天我们做了一个综合性的案例，里面进行了大量的DOM操作，如下
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831112115508.png" alt="image-20210831112115508" style="zoom:70%;" />
+<img src="images/image-20210831112115508-16449168934671.png" alt="image-20210831112115508" style="zoom:70%;" />
 
 学习了 `VUE` 后，这部分代码我们就不需要再写了。那么 `VUE` 是如何简化 DOM 书写呢？
 
 ==基于MVVM(Model-View-ViewModel)思想，实现数据的双向绑定，将编程的关注点放在数据上。==之前我们是将关注点放在了 DOM 操作上；而要了解 `MVVM` 思想，必须先聊聊 `MVC` 思想，如下图就是 `MVC` 思想图解
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831113940588.png" alt="image-20210831113940588" style="zoom:70%;" />
+<img src="images/image-20210831113940588-16449169015102.png" alt="image-20210831113940588" style="zoom:70%;" />
 
-C 就是咱们 js 代码，M 就是数据，而 V 是页面上展示的内容，如下图是我们之前写的代码
+对于前端而言**C 就是咱们 js 代码，M 就是数据，而 V 是页面上展示的内容**，如下图是我们之前写的代码
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831114227585.png" alt="image-20210831114227585" style="zoom:70%;" />
+<img src="images/image-20210831114227585-16449169092183.png" alt="image-20210831114227585" style="zoom:70%;" />
 
-`MVC` 思想是没法进行双向绑定的。双向绑定是指当数据模型数据发生变化时，页面展示的会随之发生变化，而如果表单数据发生变化，绑定的模型数据也随之发生变化。接下来我们聊聊 `MVVM` 思想，如下图是三个组件图解
+**可见`MVC` 思想是没法进行双向绑定的**。双向绑定是指当数据模型发生变化时，页面展示的会随之发生变化，并且当表单数据发生变化，绑定的模型数据也随之发生变化。
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831114805052.png" alt="image-20210831114805052" style="zoom:80%;" />
+**接下来我们聊聊 `MVVM` 思想，如下图是三个组件图解**
 
-图中的 `Model` 就是我们的数据，`View` 是视图，也就是页面标签，用户可以通过浏览器看到的内容；`Model` 和 `View` 是通过 `ViewModel` 对象进行双向绑定的，而 `ViewModel` 对象是 `Vue` 提供的。接下来让大家看一下双向绑定的效果，下图是提前准备的代码，输入框绑定了 `username` 模型数据，而在页面上也使用 `{{}}` 绑定了 `username` 模型数据
+<img src="images/image-20210831114805052-16449169111984.png" alt="image-20210831114805052" style="zoom:80%;" />
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831115645528.png" alt="image-20210831115645528" style="zoom:70%;" />
+图中的 `Model` 就是我们的数据模型，`View` 是视图，也就是页面标签；`Model` 和 `View` 是通过 **`ViewModel` 对象**进行双向绑定的，而 `ViewModel` 对象是 `Vue` 提供的。接下来让大家看一下双向绑定的效果，输入框绑定了 `username` 模型数据，而在页面上也使用 `{{}}` 绑定了 `username` 模型数据
+
+<img src="images/image-20210831115645528-16449169133175.png" alt="image-20210831115645528" style="zoom:70%;" />
 
 通过浏览器打开该页面可以看到如下页面
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831115902537.png" alt="image-20210831115902537" style="zoom:80%;" />
+<img src="images/image-20210831115902537-16449169188706.png" alt="image-20210831115902537" style="zoom:80%;" />
 
-当我们在输入框中输入内容，而输入框后面随之实时的展示我们输入的内容，这就是双向绑定的效果。
+这说明，页面展示的view视图发生变化时，其模型数据model也发生了变化，对应导致，另外一个绑定的{{username}}view视图，发生变化。
 
 ### 1.2  快速入门
 
@@ -48,6 +50,10 @@ Vue 使用起来是比较简单的，总共分为如下三步：
 
 2. **在JS代码区域，创建Vue核心对象，进行数据绑定**
 
+   ==data(  ) 是 ECMAScript 6 版本的新的写法==，之前都是用正常的对象函数的写法，稍微有点麻烦呢。这个data是函数名哦，有返回值——新的对象函数的写法，不错。
+
+   ==Vue规定所有的数据模型均放在data函数里面。==
+
    ```js
    new Vue({
        el: "#app",
@@ -55,8 +61,14 @@ Vue 使用起来是比较简单的，总共分为如下三步：
            return {
                username: ""
            }
-       }
+       },
    });
+   // 旧版写法
+       data:function () {
+            return{
+                username:"",
+           }
+       }
    ```
 
    创建 Vue 对象时，需要传递一个 js 对象，而该对象中需要如下属性：
@@ -108,7 +120,6 @@ Vue 使用起来是比较简单的，总共分为如下三步：
             }
         }*/
     });
-
 </script>
 </body>
 </html>
@@ -126,8 +137,8 @@ Vue 使用起来是比较简单的，总共分为如下三步：
 | v-model   | 在表单元素上创建双向数据绑定                        |
 | v-on      | 为HTML标签绑定事件                                  |
 | v-if      | 条件性的渲染某元素，判定为true时渲染,否则不渲染     |
-| v-else    |                                                     |
-| v-else-if |                                                     |
+| v-else    | 条件性的渲染某元素，判定为true时渲染,否则不渲染     |
+| v-else-if | 条件性的渲染某元素，判定为true时渲染,否则不渲染     |
 | v-show    | 根据条件展示某元素，区别在于切换的是display属性的值 |
 | v-for     | 列表渲染，遍历容器的元素或者对象的属性              |
 
@@ -135,7 +146,7 @@ Vue 使用起来是比较简单的，总共分为如下三步：
 
 #### 1.3.1  v-bind & v-model 指令
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831150101736.png" alt="image-20210831150101736" style="zoom:70%;" />
+<img src="images/image-20210831150101736-16449169273147.png" alt="image-20210831150101736" style="zoom:70%;" />
 
 * **v-bind**
 
@@ -199,19 +210,19 @@ Vue 使用起来是比较简单的，总共分为如下三步：
 
 通过浏览器打开上面页面，并且使用检查查看超链接的路径，该路径会根据输入框输入的路径变化而变化，这是因为超链接和输入框绑定的是同一个模型数据
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831150945931.png" alt="image-20210831150945931" style="zoom:80%;" />
+<img src="images/image-20210831150945931-16449169304908.png" alt="image-20210831150945931" style="zoom:80%;" />
 
 #### 1.3.2  v-on 指令
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831151231955.png" alt="image-20210831151231955" style="zoom:70%;" />
+<img src="images/image-20210831151231955-16449169322359.png" alt="image-20210831151231955" style="zoom:70%;" />
 
-我们在页面定义一个按钮，并给该按钮使用 `v-on` 指令绑定单击事件，html代码如下
+我们在页面定义一个按钮，并给该按钮使用 `v-on` 指令绑定单击事件
 
 ```html
 <input type="button" value="一个按钮" v-on:click="show()">
 ```
 
-而使用 `v-on` 时还可以使用简化的写法，将 `v-on:` 替换成 `@`，html代码如下
+而使用 `v-on` 时还可以使用简化的写法，将 `v-on:` 替换成 `@`
 
 ```html
 <input type="button" value="一个按钮" @click="show()">
@@ -274,7 +285,9 @@ new Vue({
 
 #### 1.3.3  条件判断指令
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831151904081.png" alt="image-20210831151904081" style="zoom:70%;" />
+<img src="images/image-20210831151904081-164491693684811.png" alt="image-20210831151904081" style="zoom:70%;" />
+
+- **v-if**
 
 接下来通过代码演示一下。在 Vue中定义一个 `count` 的数据模型，如下
 
@@ -290,7 +303,11 @@ new Vue({
 });
 ```
 
-现在要实现，当 `count` 模型的数据是3时，在页面上展示 `div1` 内容；当 `count` 模型的数据是4时，在页面上展示 `div2` 内容；`count` 模型数据是其他值时，在页面上展示 `div3`。这里为了动态改变模型数据 `count` 的值，再定义一个输入框绑定 `count` 模型数据。html 代码如下：
+- 当 `count` 模型的数据是3时，在页面上展示 `div1` 内容；
+- 当 `count` 模型的数据是4时，在页面上展示 `div2` 内容；
+- `count` 模型数据是其他值时，在页面上展示 `div3`。
+
+这里为了动态改变模型数据 `count` 的值，再定义一个输入框绑定 `count` 模型数据。html 代码如下：
 
 ```html
 <div id="app">
@@ -338,7 +355,9 @@ new Vue({
 
 通过浏览器打开页面并在输入框输入不同的值，效果如下
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831154300325.png" alt="image-20210831154300325" style="zoom:80%;" />
+<img src="images/image-20210831154300325-164491694139712.png" alt="image-20210831154300325" style="zoom:80%;" />
+
+- **v-show**
 
 然后我们在看看 `v-show` 指令的效果，如果模型数据 `count ` 的值是3时，展示 `div v-show` 内容，否则不展示，html页面代码如下
 
@@ -350,17 +369,19 @@ new Vue({
 
 浏览器打开效果如下：
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831154547780.png" alt="image-20210831154547780" style="zoom:80%;" />
+<img src="images/image-20210831154547780-164491694349613.png" alt="image-20210831154547780" style="zoom:80%;" />
+
+- **两者的不同**
 
 通过上面的演示，发现 `v-show` 和 `v-if` 效果一样，那它们到底有什么区别呢？我们根据浏览器的检查功能查看源代码
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831154759672.png" alt="image-20210831154759672" style="zoom:80%;" />
+<img src="images/image-20210831154759672-164491694587814.png" alt="image-20210831154759672" style="zoom:80%;" />
 
 通过上图可以看出 `v-show` 不展示的原理是给对应的标签添加 `display` css属性，并将该属性值设置为 `none` ，这样就达到了隐藏的效果。而 `v-if` 指令是条件不满足时根本就不会渲染。
 
 #### 1.3.4  v-for 指令
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831155204829.png" alt="image-20210831155204829" style="zoom:80%;" />
+<img src="images/image-20210831155204829-164491695352615.png" alt="image-20210831155204829" style="zoom:80%;" />
 
 这个指令看到名字就知道是用来遍历的，该指令使用的格式如下：
 
@@ -370,16 +391,20 @@ new Vue({
 </标签>
 ```
 
-> ==注意：需要循环那个标签，`v-for` 指令就写在那个标签上。==
+> ==注意：需要循环哪个标签，`v-for` 指令就写在那个标签上。==
+>
+> 原理是，生成多个标签
 
 如果在页面需要使用到集合模型数据的索引，就需要使用如下格式：
 
 ```html
 <标签 v-for="(变量名,索引变量) in 集合模型数据">
-    <!--索引变量是从0开始，所以要表示序号的话，需要手动的加1-->
    {{索引变量 + 1}} {{变量名}}
 </标签>
+ <!--索引变量是从0开始，所以要表示序号的话，需要手动的加1-->
 ```
+
+<img src="images/image-20220215170635767.png" alt="image-20220215170635767" style="zoom:80%;" />
 
 **代码演示：**
 
@@ -421,21 +446,23 @@ new Vue({
 
 通过浏览器打开效果如下
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831155837801.png" alt="image-20210831155837801" style="zoom:80%;" />
+<img src="images/image-20210831155837801-164491696155316.png" alt="image-20210831155837801" style="zoom:80%;" />
 
 ### 1.4  生命周期 
 
-生命周期的八个阶段：每触发一个生命周期事件，会自动执行一个生命周期方法，这些生命周期方法也被称为钩子方法。
+生命周期的八个阶段：每触发一个生命周期事件，会自动执行一个生命周期方法，这些生命周期方法也被称为**钩子函数**。
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831160239294.png" alt="image-20210831160239294" style="zoom:80%;" />
+<img src="images/image-20220215172016080.png" alt="image-20220215172016080" style="zoom:80%;" />
 
 下图是 Vue 官网提供的从创建 Vue 到效果 Vue 对象的整个过程及各个阶段对应的钩子函数
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831160335496.png" alt="image-20210831160335496" style="zoom:80%;" />
+<img src="images/image-20210831160335496-164491696520617.png" alt="image-20210831160335496" style="zoom:80%;" />
 
 看到上面的图，大家无需过多的关注这张图。这些钩子方法我们只关注 `mounted` 就行了。
 
-`mounted`：挂载完成，Vue初始化成功，HTML页面渲染成功。而以后我们会在该方法中==发送异步请求，加载数据。==
+`mounted`：挂载完成，Vue初始化成功，HTML页面渲染成功。在这以后==我们会在该方法中发送异步请求，加载数据。==,直接在vue实例里面添加一个函数即可.
+
+<img src="images/image-20220215175018238.png" alt="image-20220215175018238" style="zoom:80%;" />
 
 ### 1.5  案例
 
@@ -443,13 +470,15 @@ new Vue({
 
 使用 Vue 简化我们在前一天ajax学完后做的品牌列表数据查询和添加功能
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831161040800.png" alt="image-20210831161040800" style="zoom:80%;" />
+<img src="images/image-20210831161040800-164491698400418.png" alt="image-20210831161040800" style="zoom:80%;" />
 
 此案例只是使用 Vue 对前端代码进行优化，后端代码无需修改。
 
+回顾一下原来采用的document的操作,是通过innerHtml的方式,拼接字符串形式,JavaScript里面写了大量代码,不方便,可读性很差
+
 #### 1.5.2  查询所有功能
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831161346678.png" alt="image-20210831161346678" style="zoom:80%;" />
+<img src="images/image-20210831161346678-164491708674824.png" alt="image-20210831161346678" style="zoom:80%;" />
 
 1. **在 brand.html 页面引入 vue 的js文件**
 
@@ -472,12 +501,12 @@ new Vue({
        },
        mounted(){
            // 页面加载完成后，发送异步请求，查询数据
-           var _this = this;
+           var that = this;
            axios({
                method:"get",
                url:"http://localhost:8080/brand-demo/selectAllServlet"
            }).then(function (resp) {
-               _this.brands = resp.data;
+               that.brands = resp.data;
            })
        }
    })
@@ -500,7 +529,7 @@ new Vue({
          <td>{{brand.companyName}}</td>
          <td>{{brand.ordered}}</td>
          <td>{{brand.description}}</td>
-         <td>{{brand.statusStr}}</td>
+         <td>{{brand.status}}</td>
          <td><a href="#">修改</a> <a href="#">删除</a></td>
      </tr>
      ```
@@ -515,52 +544,50 @@ new Vue({
     <title>Title</title>
 </head>
 <body>
+<a href="addBrand.html"><input type="button" value="新增"></a><br>
+<hr>
 <div id="app">
-    <a href="addBrand.html"><input type="button" value="新增"></a><br>
-    <hr>
-    <table id="brandTable" border="1" cellspacing="0" width="100%">
-        <tr>
-            <th>序号</th>
-            <th>品牌名称</th>
-            <th>企业名称</th>
-            <th>排序</th>
-            <th>品牌介绍</th>
-            <th>状态</th>
-            <th>操作</th>
-        </tr>
-        <!--
-            使用v-for遍历tr
-        -->
-        <tr v-for="(brand,i) in brands" align="center">
-            <td>{{i + 1}}</td>
-            <td>{{brand.brandName}}</td>
-            <td>{{brand.companyName}}</td>
-            <td>{{brand.ordered}}</td>
-            <td>{{brand.description}}</td>
-            <td>{{brand.statusStr}}</td>
-            <td><a href="#">修改</a> <a href="#">删除</a></td>
-        </tr>
-    </table>
+<table id="brandTable" border="1" cellspacing="0" width="100%">
+    <tr>
+        <th>序号</th>
+        <th>品牌名称</th>
+        <th>企业名称</th>
+        <th>排序</th>
+        <th>品牌介绍</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    <tr v-for="(brand,i) in brands" align="center">
+        <th>{{i+1}}</th>
+        <th>{{brand.brandName}}</th>
+        <th>{{brand.companyName}}</th>
+        <th>{{brand.ordered}}</th>
+        <th>{{brand.description}}</th>
+        <th>{{brand.status}}</th>
+        <td><a href="#">修改</a> <a href="#">删除</a></td>
+    </tr>
+</table>
 </div>
 <script src="js/axios-0.18.0.js"></script>
 <script src="js/vue.js"></script>
-
 <script>
     new Vue({
-        el: "#app",
+        el:"#app",
         data(){
             return{
-                brands:[]
+                brands:[],
             }
         },
+        methods:{
+
+        },
         mounted(){
-            // 页面加载完成后，发送异步请求，查询数据
-            var _this = this;
+            var that = this;
             axios({
                 method:"get",
-                url:"http://localhost:8080/brand-demo/selectAllServlet"
+                url:"http://localhost:8080/brand-demo/selectAllServlet",
             }).then(function (resp) {
-                _this.brands = resp.data;
+                that.brands = resp.data;
             })
         }
     })
@@ -573,11 +600,11 @@ new Vue({
 
 页面操作效果如下：
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831163001830.png" alt="image-20210831163001830" style="zoom:80%;" />
+<img src="C:\Users\Joker_Monster\Desktop\Java笔记\JavaWeb_Note\images\image-20210831163001830-164491705053120.png" alt="image-20210831163001830" style="zoom:80%;" />
 
 整体流程如下
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831163035298.png" alt="image-20210831163035298" style="zoom:70%;" />
+<img src="C:\Users\Joker_Monster\Desktop\Java笔记\JavaWeb_Note\images\image-20210831163035298-164491705262521.png" alt="image-20210831163035298" style="zoom:70%;" />
 
 > ==注意：前端代码的关键点在于使用 `v-model` 指令给标签项绑定模型数据，利用双向绑定特性，在发送异步请求时提交数据。==
 
@@ -604,11 +631,11 @@ new Vue({
        methods:{
            submitForm(){
                // 发送ajax请求，添加
-               var _this = this;
+               var that = this;
                axios({
                    method:"post",
                    url:"http://localhost:8080/brand-demo/addServlet",
-                   data:_this.brand
+                   data:that.brand
                }).then(function (resp) {
                    // 判断响应数据是否为 success
                    if(resp.data == "success"){
@@ -684,11 +711,11 @@ new Vue({
         methods:{
             submitForm(){
                 // 发送ajax请求，添加
-                var _this = this;
+                var that = this;
                 axios({
                     method:"post",
                     url:"http://localhost:8080/brand-demo/addServlet",
-                    data:_this.brand
+                    data:that.brand
                 }).then(function (resp) {
                     // 判断响应数据是否为 success
                     if(resp.data == "success"){
@@ -713,7 +740,7 @@ Element 提供了很多组件（组成网页的部件）供我们使用。例如
 
 如下图左边的是我们编写页面看到的按钮，上图右边的是 Element 提供的页面效果，效果一目了然。
 
-<img src="../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831170943892.png" alt="image-20210831170943892" style="zoom:80%;" />
+<img src="C:\Users\Joker_Monster\Desktop\Java笔记\JavaWeb_Note\images\image-20210831170943892-164491705797122.png" alt="image-20210831170943892" style="zoom:80%;" />
 
 我们学习 Element 其实就是学习怎么从官网拷贝组件到我们自己的页面并进行修改，官网网址是
 
@@ -723,7 +750,7 @@ https://element.eleme.cn/#/zh-CN
 
 进入官网能看到如下页面
 
-![image-20210831171456559](../../学习资料/JavaWeb-资料/day13-Vue&Element/01-Vue&ElementUI/ppt/assets/image-20210831171456559.png)
+![image-20210831171456559](C:\Users\Joker_Monster\Desktop\Java笔记\JavaWeb_Note\images\image-20210831171456559-164491706059123.png)
 
 接下来直接点击 `组件` ，页面如下
 
@@ -738,14 +765,14 @@ https://element.eleme.cn/#/zh-CN
 2. 创建页面，并在页面引入Element 的css、js文件 和 Vue.js
 
    ```html
-   <script src="vue.js"></script>
-   <script src="element-ui/lib/index.js"></script>
-   <link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+     <script src="vue.js"></script>
+     <script src="element-ui/lib/index.js"></script>
+     <link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
    ```
 
 3. .创建Vue核心对象
 
-   Element 是基于 Vue 的，所以使用Element时必须要创建 Vue 对象
+   Element 是基于 Vue 的，所以使用Element时必须要创建 Vue 对象.后面所有的Element相关的东西均写在Vue的管理范围内就行
 
    ```html
    <script>
@@ -1452,493 +1479,3 @@ Element 提供了两种布局方式，分别是：
 </body>
 </html>
 ```
-
-## 3，综合案例
-
-### 3.1  功能介绍
-
-![image-20210825171411003](../../传智播客/2021年/web阶段文档编写/JavaWeb课程文档/day14-综合案例/assets/image-20210825171411003.png)
-
-以上是我们在综合案例要实现的功能。对数据的除了对数据的增删改查功能外，还有一些复杂的功能，如 `批量删除`、`分页查询`、`条件查询` 等功能
-
-* `批量删除` 功能：每条数据前都有复选框，当我选中多条数据并点击 `批量删除` 按钮后，会发送请求到后端并删除数据库中指定的多条数据。
-* `分页查询` 功能：当数据库中有很多数据时，我们不可能将所有的数据展示在一页里，这个时候就需要分页展示数据。
-* `条件查询` 功能：数据库量大的时候，我们就需要精确的查询一些想看到的数据，这个时候就需要通过条件查询。
-
-这里的 `修改品牌` 和 `删除品牌` 功能在课程上不做讲解，留作同学来下的练习。
-
-### 3.2  环境准备
-
-环境准备我们主要完成以下两件事即可
-
-* 将资料的 brand-case 模块导入到 idea中
-* 执行资料中提供的 tb_brand.sql脚本
-
-#### 3.2.1  工程准备
-
-将 `04-资料\01-初始工程` 中的 `brand-case` 工程导入到我们自己的 idea 中。工程结构如下：
-
-<img src="../../传智播客/2021年/web阶段文档编写/JavaWeb课程文档/day14-综合案例/assets/image-20210825195522904.png" alt="image-20210825195522904" style="zoom:80%;" />
-
-#### 3.2.2  创建表
-
-下面是创建表的语句
-
-```sql
--- 删除tb_brand表
-drop table if exists tb_brand;
--- 创建tb_brand表
-create table tb_brand (
-    -- id 主键
-    id           int primary key auto_increment,
-    -- 品牌名称
-    brand_name   varchar(20),
-    -- 企业名称
-    company_name varchar(20),
-    -- 排序字段
-    ordered      int,
-    -- 描述信息
-    description  varchar(100),
-    -- 状态：0：禁用  1：启用
-    status       int
-);
--- 添加数据
-insert into tb_brand (brand_name, company_name, ordered, description, status)
-values 
-       ('华为', '华为技术有限公司', 100, '万物互联', 1),
-       ('小米', '小米科技有限公司', 50, 'are you ok', 1),
-       ('格力', '格力电器股份有限公司', 30, '让世界爱上中国造', 1),
-       ('阿里巴巴', '阿里巴巴集团控股有限公司', 10, '买买买', 1),
-       ('腾讯', '腾讯计算机系统有限公司', 50, '玩玩玩', 0),
-       ('百度', '百度在线网络技术公司', 5, '搜搜搜', 0),
-       ('京东', '北京京东世纪贸易有限公司', 40, '就是快', 1),
-       ('小米', '小米科技有限公司', 50, 'are you ok', 1),
-       ('三只松鼠', '三只松鼠股份有限公司', 5, '好吃不上火', 0),
-       ('华为', '华为技术有限公司', 100, '万物互联', 1),
-       ('小米', '小米科技有限公司', 50, 'are you ok', 1),
-       ('格力', '格力电器股份有限公司', 30, '让世界爱上中国造', 1),
-       ('阿里巴巴', '阿里巴巴集团控股有限公司', 10, '买买买', 1),
-       ('腾讯', '腾讯计算机系统有限公司', 50, '玩玩玩', 0),
-       ('百度', '百度在线网络技术公司', 5, '搜搜搜', 0),
-       ('京东', '北京京东世纪贸易有限公司', 40, '就是快', 1),
-       ('华为', '华为技术有限公司', 100, '万物互联', 1),
-       ('小米', '小米科技有限公司', 50, 'are you ok', 1),
-       ('格力', '格力电器股份有限公司', 30, '让世界爱上中国造', 1),
-       ('阿里巴巴', '阿里巴巴集团控股有限公司', 10, '买买买', 1),
-       ('腾讯', '腾讯计算机系统有限公司', 50, '玩玩玩', 0),
-       ('百度', '百度在线网络技术公司', 5, '搜搜搜', 0),
-       ('京东', '北京京东世纪贸易有限公司', 40, '就是快', 1),
-       ('小米', '小米科技有限公司', 50, 'are you ok', 1),
-       ('三只松鼠', '三只松鼠股份有限公司', 5, '好吃不上火', 0),
-       ('华为', '华为技术有限公司', 100, '万物互联', 1),
-       ('小米', '小米科技有限公司', 50, 'are you ok', 1),
-       ('格力', '格力电器股份有限公司', 30, '让世界爱上中国造', 1),
-       ('阿里巴巴', '阿里巴巴集团控股有限公司', 10, '买买买', 1),
-       ('腾讯', '腾讯计算机系统有限公司', 50, '玩玩玩', 0),
-       ('百度', '百度在线网络技术公司', 5, '搜搜搜', 0),
-       ('京东', '北京京东世纪贸易有限公司', 40, '就是快', 1),
-       ('华为', '华为技术有限公司', 100, '万物互联', 1),
-       ('小米', '小米科技有限公司', 50, 'are you ok', 1),
-       ('格力', '格力电器股份有限公司', 30, '让世界爱上中国造', 1),
-       ('阿里巴巴', '阿里巴巴集团控股有限公司', 10, '买买买', 1),
-       ('腾讯', '腾讯计算机系统有限公司', 50, '玩玩玩', 0),
-       ('百度', '百度在线网络技术公司', 5, '搜搜搜', 0),
-       ('京东', '北京京东世纪贸易有限公司', 40, '就是快', 1),
-       ('小米', '小米科技有限公司', 50, 'are you ok', 1),
-       ('三只松鼠', '三只松鼠股份有限公司', 5, '好吃不上火', 0),
-       ('华为', '华为技术有限公司', 100, '万物互联', 1),
-       ('小米', '小米科技有限公司', 50, 'are you ok', 1),
-       ('格力', '格力电器股份有限公司', 30, '让世界爱上中国造', 1),
-       ('阿里巴巴', '阿里巴巴集团控股有限公司', 10, '买买买', 1),
-       ('腾讯', '腾讯计算机系统有限公司', 50, '玩玩玩', 0),
-       ('百度', '百度在线网络技术公司', 5, '搜搜搜', 0),
-       ('京东', '北京京东世纪贸易有限公司', 40, '就是快', 1);
-```
-
-### 3.3  查询所有功能
-
-![image-20210825200138600](../../传智播客/2021年/web阶段文档编写/JavaWeb课程文档/day14-综合案例/assets/image-20210825200138600.png)
-
-如上图所示是查询所有品牌数据在页面展示的效果。要实现这个功能，要先搞明白如下问题：
-
-* 什么时候发送异步请求？
-
-  页面加载完毕后就需要在页面上看到所有的品牌数据。所以在 `mounted()` 这个构造函数中写发送异步请求的代码。
-
-* 请求需要携带参数吗？
-
-  查询所有功能不需要携带什么参数。
-
-* 响应的数据格式是什么样？
-
-  后端是需要将 `List<Brand>` 对象转换为 JSON 格式的数据并响应回给浏览器。响应数据格式如下：
-
-  ![image-20210825201634849](../../传智播客/2021年/web阶段文档编写/JavaWeb课程文档/day14-综合案例/assets/image-20210825201634849.png)
-
-整体流程如下
-
-![image-20210825200332542](../../传智播客/2021年/web阶段文档编写/JavaWeb课程文档/day14-综合案例/assets/image-20210825200332542.png)
-
-我们先实现后端程序，然后再实现前端程序。
-
-#### 3.3.1 后端实现
-
-##### 3.3.1.1  dao方法实现
-
-在 `com.itheima.mapper.BrandMapper` 接口中定义抽象方法，并使用 `@Select` 注解编写 sql 语句
-
-```java
-/**
-     * 查询所有
-     * @return
-     */
-@Select("select * from tb_brand")
-List<Brand> selectAll();
-```
-
-由于表中有些字段名和实体类中的属性名没有对应，所以需要在 `com/itheima/mapper/BrandMapper.xml` 映射配置文件中定义结果映射 ，使用`resultMap` 标签。映射配置文件内容如下：
-
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itheima.mapper.BrandMapper">
-
-    <resultMap id="brandResultMap" type="brand">
-        <result property="brandName" column="brand_name" />
-        <result property="companyName" column="company_name" />
-    </resultMap>
-</mapper>
-```
-
-定义完结果映射关系后，在接口 `selectAll()` 方法上引用该结构映射。使用 `@ResultMap("brandResultMap")` 注解
-
-完整接口的 `selectAll()` 方法如下：
-
-```java
-/**
-     * 查询所有
-     * @return
-     */
-@Select("select * from tb_brand")
-@ResultMap("brandResultMap")
-List<Brand> selectAll();
-```
-
-##### 3.3.1.2  service方法实现
-
-在 `com.itheima.service` 包下创建 `BrandService` 接口，在该接口中定义查询所有的抽象方法
-
-```java
-public interface BrandService {
-
-    /**
-     * 查询所有
-     * @return
-     */
-    List<Brand> selectAll();
-}
-```
-
-并在 `com.itheima.service` 下再创建 `impl` 包；`impl` 表示是放 service 层接口的实现类的包。 在该包下创建名为 `BrandServiceImpl` 类
-
-```java
-public class BrandServiceImpl implements BrandService {
-
-    @Override
-    public List<Brand> selectAll() {
-    }
-}
-```
-
-此处为什么要给 service 定义接口呢？因为service定义了接口后，在 servlet 中就可以使用多态的形式创建Service实现类的对象，如下：
-
-<img src="../../传智播客/2021年/web阶段文档编写/JavaWeb课程文档/day14-综合案例/assets/image-20210825203843142.png" alt="image-20210825203843142" style="zoom:80%;" />
-
-这里使用多态是因为方便我们后期解除 `Servlet` 和 `service` 的耦合。从上面的代码我们可以看到 `SelectAllServlet` 类和 `BrandServiceImpl` 类之间是耦合在一起的，如果后期 `BrandService` 有其它更好的实现类（例如叫 `BrandServiceImpl`），那就需要修改 `SelectAllServlet` 类中的代码。后面我们学习了 `Spring` 框架后就可以解除 `SelectAllServlet` 类和红色框括起来的代码耦合。而现在咱们还做不到解除耦合，在这里只需要理解为什么定义接口即可。
-
-`BrandServiceImpl` 类代码如下：
-
-```java
-public class BrandServiceImpl implements BrandService {
-    //1. 创建SqlSessionFactory 工厂对象
-    SqlSessionFactory factory = SqlSessionFactoryUtils.getSqlSessionFactory();
-
-    @Override
-    public List<Brand> selectAll() {
-        //2. 获取SqlSession对象
-        SqlSession sqlSession = factory.openSession();
-        //3. 获取BrandMapper
-        BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
-
-        //4. 调用方法
-        List<Brand> brands = mapper.selectAll();
-
-        //5. 释放资源
-        sqlSession.close();
-
-        return brands;
-    }
-}
-```
-
-##### 3.3.1.3  servlet实现
-
-在 `com.itheima.web.servlet` 包下定义名为 `SelectAllServlet` 的查询所有的 `servlet`。该 `servlet` 逻辑如下：
-
-* 调用service的 `selectAll()` 方法查询所有的品牌数据，并接口返回结果
-* 将返回的结果转换为 json 数据
-* 响应 json 数据
-
-代码如下：
-
-```java
-@WebServlet("/selectAllServlet")
-public class SelectAllServlet extends HttpServlet {
-
-    private BrandService brandService = new BrandServiceImpl();
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //1. 调用service查询
-        List<Brand> brands = brandService.selectAll();
-        //2. 转为JSON
-        String jsonString = JSON.toJSONString(brands);
-        //3. 写数据
-        response.setContentType("text/json;charset=utf-8"); //告知浏览器响应的数据是什么， 告知浏览器使用什么字符集进行解码
-        response.getWriter().write(jsonString);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.doGet(request, response);
-    }
-}
-```
-
-##### 3.3.1.4  测试后端程序
-
-在浏览器输入访问 servlet 的资源路径 `http://localhost:8080/brand-case/selectAllServlet` ，如果没有报错，并能看到如下信息表明后端程序没有问题
-
-![image-20210825205133752](../../传智播客/2021年/web阶段文档编写/JavaWeb课程文档/day14-综合案例/assets/image-20210825205133752.png)
-
-#### 3.3.2  前端实现
-
-前端需要在页面加载完毕后发送 ajax 请求，所以发送请求的逻辑应该放在 `mounted()` 钩子函数中。而响应回来的数据需要赋值给表格绑定的数据模型，从下图可以看出表格绑定的数据模型是 `tableData`
-
-<img src="../../传智播客/2021年/web阶段文档编写/JavaWeb课程文档/day14-综合案例/assets/image-20210825220436889.png" alt="image-20210825220436889" style="zoom:70%;" />
-
-前端代码如下：
-
-```js
- mounted(){
-     //当页面加载完成后，发送异步请求，获取数据
-     var _this = this;
-
-     axios({
-         method:"get",
-         url:"http://localhost:8080/brand-case/selectAllServlet"
-     }).then(function (resp) {
-         _this.tableData = resp.data;
-     })
- }
-```
-
-### 3.4  添加功能
-
-<img src="../../传智播客/2021年/web阶段文档编写/JavaWeb课程文档/day14-综合案例/assets/image-20210825221138245.png" alt="image-20210825221138245" style="zoom:70%;" />
-
-上图是添加数据的对话框，当点击 `提交` 按钮后就需要将数据提交到后端，并将数据保存到数据库中。下图是整体的流程：
-
-![image-20210825221329231](../../传智播客/2021年/web阶段文档编写/JavaWeb课程文档/day14-综合案例/assets/image-20210825221329231.png)
-
-页面发送请求时，需要将输入框输入的内容提交给后端程序，而这里是以 json 格式进行传递的。而具体的数据格式如下：
-
-![image-20210826185917510](../../传智播客/2021年/web阶段文档编写/JavaWeb课程文档/day14-综合案例/assets/image-20210826185917510.png)
-
-> ==注意：由于是添加数据，所以上述json数据中id是没有值的。==
-
-#### 3.4.1  后端实现
-
-##### 3.4.1.1  dao方法实现
-
-在 `BrandMapper` 接口中定义 `add()` 添加方法，并使用 `@Insert` 注解编写sql语句
-
-```java
-/**
-     * 添加数据
-     * @param brand
-     */
-@Insert("insert into tb_brand values(null,#{brandName},#{companyName},#{ordered},#{description},#{status})")
-void add(Brand brand);
-```
-
-##### 3.4.1.2  service方法实现
-
-在 `BrandService` 接口中定义 `add()` 添加数据的业务逻辑方法
-
-```java
-/**
-     * 添加数据
-     * @param brand
-     */
-void add(Brand brand);
-```
-
-在 `BrandServiceImpl` 类中重写 `add()` 方法，并进行业务逻辑实现
-
-```java
-@Override
-public void add(Brand brand) {
-    //2. 获取SqlSession对象
-    SqlSession sqlSession = factory.openSession();
-    //3. 获取BrandMapper
-    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
-
-    //4. 调用方法
-    mapper.add(brand);
-    sqlSession.commit();//提交事务
-
-    //5. 释放资源
-    sqlSession.close();
-}
-```
-
-> ==注意：增删改操作一定要提交事务。==
-
-##### 3.4.1.3  servlet实现
-
-在 `com.itheima.web.servlet` 包写定义名为 `AddServlet` 的 Servlet。该 Servlet 的逻辑如下：
-
-* 接收页面提交的数据。页面到时候提交的数据是 json 格式的数据，所以此处需要使用输入流读取数据
-* 将接收到的数据转换为 `Brand` 对象
-* 调用 service 的 `add()` 方法进行添加的业务逻辑处理
-* 给浏览器响应添加成功的标识，这里直接给浏览器响应 `success` 字符串表示成功
-
-servlet 代码实现如下：
-
-```java
-@WebServlet("/addServlet")
-public class AddServlet extends HttpServlet {
-
-    private BrandService brandService = new BrandServiceImpl();
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        //1. 接收品牌数据
-        BufferedReader br = request.getReader();
-        String params = br.readLine();//json字符串
-        //转为Brand对象
-        Brand brand = JSON.parseObject(params, Brand.class);
-        //2. 调用service添加
-        brandService.add(brand);
-        //3. 响应成功的标识
-        response.getWriter().write("success");
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.doGet(request, response);
-    }
-}
-```
-
-#### 3.4.2  前端实现
-
-<img src="../../传智播客/2021年/web阶段文档编写/JavaWeb课程文档/day14-综合案例/assets/image-20210825223121993.png" alt="image-20210825223121993" style="zoom:60%;" />
-
-上图左边是页面效果，里面的 `提交` 按钮可以通过上图右边看出绑定了一个 单击事件，而该事件绑定的是 `addBrand` 函数，所以添加数据功能的逻辑代码应该写在 `addBrand()`  函数中。在此方法中需要发送异步请求并将表单中输入的数据作为参数进行传递。如下
-
-```js
-// 添加数据
-addBrand() {
-    var _this = this;
-
-    // 发送ajax请求，添加数据
-    axios({
-        method:"post",
-        url:"http://localhost:8080/brand-case/addServlet",
-        data:_this.brand
-    }).then(function (resp) {
-       	//响应数据的处理逻辑
-    })
-}
-```
-
-在 `then` 函数中的匿名函数是成功后的回调函数，而 `resp.data` 就可以获取到响应回来的数据，如果值是 `success` 表示数据添加成功。成功后我们需要做一下逻辑处理：
-
-1. **关闭新增对话框窗口**
-
-   如下图所示是添加数据的对话框代码，从代码中可以看到此对话框绑定了 `dialogVisible` 数据模型，只需要将该数据模型的值设置为 false，就可以关闭新增对话框窗口了。
-
-   <img src="../../传智播客/2021年/web阶段文档编写/JavaWeb课程文档/day14-综合案例/assets/image-20210825223933953.png" alt="image-20210825223933953" style="zoom:70%;" />
-
-2. **重新查询数据**
-
-   数据添加成功与否，用户只要能在页面上查看到数据说明添加成功。而此处需要重新发送异步请求获取所有的品牌数据，而这段代码在 `查询所有` 功能中已经实现，所以我们可以将此功能代码进行抽取，抽取到一个 `selectAll()` 函数中
-
-   ```js
-   // 查询所有数据
-   selectAll(){
-       var _this = this;
-   
-       axios({
-           method:"get",
-           url:"http://localhost:8080/brand-case/selectAllServlet"
-       }).then(function (resp) {
-           _this.tableData = resp.data;
-       })
-   }
-   ```
-
-   那么就需要将 `mounted()` 钩子函数中代码改进为
-
-   ```js
-   mounted(){
-       //当页面加载完成后，发送异步请求，获取数据
-       this.selectAll();
-   }
-   ```
-
-   同时在新增响应的回调中调用 `selectAll()` 进行数据的重新查询。
-
-3. **弹出消息给用户提示添加成功**
-
-   ![image-20210825224958220](../../传智播客/2021年/web阶段文档编写/JavaWeb课程文档/day14-综合案例/assets/image-20210825224958220.png)
-
-   上图左边就是 elementUI 官网提供的成功提示代码，而上图右边是具体的效果。
-
-   > ==注意：上面的this需要的是表示 VUE 对象的this。==
-
-综上所述，前端代码如下：
-
-```js
-// 添加数据
-addBrand() {
-    var _this = this;
-
-    // 发送ajax请求，添加数据
-    axios({
-        method:"post",
-        url:"http://localhost:8080/brand-case/addServlet",
-        data:_this.brand
-    }).then(function (resp) {
-        if(resp.data == "success"){
-            //添加成功
-            //关闭窗口
-            _this.dialogVisible = false;
-            // 重新查询数据
-            _this.selectAll();
-            // 弹出消息提示
-            _this.$message({
-                message: '恭喜你，添加成功',
-                type: 'success'
-            });
-        }
-    })
-}
-```
-
-##
