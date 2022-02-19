@@ -579,7 +579,7 @@ select count(*) from stu;
 select count(id) from stu;
 ```
 
-\* 表示所有字段数据，即只有当这条数据的所有字段列表全为null时才不统计，只要有一个字段不为0，就会统计该条数据。
+==* 表示所有字段数据，即只有当这条数据的所有字段列表全为null时才不统计，只要有一个字段不为0，就会统计该条数据。==
 
 - **查询数学成绩的最高分**
 
@@ -1209,6 +1209,8 @@ DROP TABLE IF EXISTS dept;
 执行下面的多表查询语句
 
 ```sql
+//select emp.*,dept.* from emp,dept;可以简写成下面这种
+
 select * from emp , dept;  -- 从emp和dept表中查询所有的字段数据
 ```
 
@@ -1268,10 +1270,12 @@ SELECT 字段列表 FROM 表1 [INNER] JOIN 表2 ON 条件;
 
 ```sql
 -- 隐式内连接
+select emp.*,dept.* from emp,dept; -- 可以简写成下面这种
 select * from emp , dept where emp.dep_id = dept.did;
 
 select emp.NAME,emp.age,dept.dep_name 
 from emp,dept where emp.dep_id= dept.did;
+
 -- 上面语句中使用表名指定字段所属有点麻烦，sql也支持给表指别名
 select t1.NAME,t1.age,t2.dep_name 
 from emp as t1,dept as t2 where t1.dep_id= t2.did;
@@ -1292,9 +1296,9 @@ select * from emp  join dept on emp.dep_id = dept.did;
 
 ### 3.2 外连接查询
 
-> 左外连接：相当于查询A表所有数据和交集部分数据
+> 左外连接：相当于查询A表所有数据和交集部分数据(A + ANB)
 >
-> 右外连接：相当于查询B表所有数据和交集部分数据
+> 右外连接：相当于查询B表所有数据和交集部分数据(B+ ANB)
 
 <img src="images/image-20210724174717647-16432562272981.png" alt="image-20210724174717647" style="zoom:80%;" />
 
@@ -1359,9 +1363,9 @@ select * from emp where salary > (select salary from emp where name = '猪八戒
 这就是查询语句中嵌套查询语句。
 
 - **子查询根据查询结果不同，作用不同**
-  - 子查询语句结果是单行单列，子查询语句作为条件值，使用 =  !=  >  <  等进行条件判断
-  - 子查询语句结果是多行单列，子查询语句作为条件值，使用 in 等关键字进行条件判断
-  - 子查询语句结果是多行多列，子查询语句作为虚拟表，虚拟表要加（）哦
+  - 子查询语句结果是==单行单列==，子查询语句作为条件值，使用 =  !=  >  <  等进行条件判断
+  - 子查询语句结果是==多行单列==，子查询语句作为条件值，使用 in 等关键字进行条件判断
+  - 子查询语句结果是==多行多列==，子查询语句作为虚拟表，虚拟表要加（）哦
 
 - **案例**
 
@@ -1574,6 +1578,19 @@ WHERE
 ```
 
 <img src="images/image-20220127173401159.png" alt="image-20220127173401159" style="zoom:80%;" />
+
+### 3.5 桥梁开发案例
+
+预警记录里面存放了桥梁id和监测类型id，返回前端的数据里面需要桥梁名称和监测类型名称。（is_deal=0——表示未处理的预警记录；is_deal=1——表示已经处理过的预警记录）
+
+```sql
+select t1.*,t2.bridge_name,t3.monitor_type_name
+from bridge_alert_record as t1 
+JOIN bridge_manage as t2 on t1.bridge_id=t2.bridge_id and t1.is_deal=1
+JOIN bridge_monitor_type as t3 on t1.monitor_type_id = t3.monitor_type_id;
+```
+
+
 
 ## 4. 事务
 
