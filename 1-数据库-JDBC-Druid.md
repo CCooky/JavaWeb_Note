@@ -3079,3 +3079,22 @@ public class Brand {
 
 # 后面学习Maven&Mybatis
 
+# PS：MySql函数
+
+## 1. concat
+
+字符串拼接函数，Mybatis中模糊搜索比较多
+
+```sql
+concat('%'+'brand_name'+'%')
+```
+
+## 2. date_format
+
+日期格式化函数，可以定制化日期格式。
+
+```sql
+update goods_msg SET update_date = DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s') WHERE id = '1111122222';
+-- 对应时间格式2022-2-20 12:30:30
+```
+
