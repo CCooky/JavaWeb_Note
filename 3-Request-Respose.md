@@ -2,7 +2,11 @@
 
 ## 1，Request和Response的概述
 
-==Request是请求对象，Response是响应对象。==这两个对象在我们使用Servlet的时候有看到：![1628735216156](images/1628735216156.png)
+==Request是请求对象，Response是响应对象。==这两个对象在我们使用Servlet的时候有看到：
+
+
+
+![1628735216156](images/1628735216156.png)
 
 此时，我们就需要思考一个问题request和response这两个参数的作用是什么?
 
@@ -65,7 +69,7 @@ public class ServletDemo3 extends HttpServlet {
 
 **首先，我们先来看下Request的继承体系:**
 
-![1628740441008](images/1628740441008.png)
+<img src="images/1628740441008.png" alt="1628740441008" style="zoom:80%;" />
 
 从上图中可以看出，ServletRequest和HttpServletRequest都是Java提供的，所以我们可以打开JavaEE提供的API文档[参考: 资料/JavaEE7-api.chm],打开后可以看到:
 
@@ -292,6 +296,10 @@ BufferedReader流是通过request对象来获取的，当请求完成后request�
 
 ![1628770585480](images/1628770585480.png)
 
+
+
+
+
 #### 2.2.4 获取请求参数的通用方式
 
 在学习下面内容之前，我们先提出两个问题:
@@ -360,6 +368,8 @@ BufferedReader getReader();
 (3) 把分割后端数据，存入到一个Map集合中:
 
 ![1628779368501](images/1628779368501.png)
+
+
 
 **注意**:因为参数的值可能是一个，也可能有多个，所以Map的值的类型为String数组。
 
@@ -538,6 +548,8 @@ public class RequestDemo1 extends HttpServlet {
 }
 ```
 
+
+
 ### 2.3 IDEA快速创建Servlet
 
 使用通用方式获取请求参数后，屏蔽了GET和POST的请求方式代码的不同，则代码可以定义如下格式:
@@ -619,6 +631,8 @@ public class RequestDemo4 extends HttpServlet {
 ![1628784356157](images/1628784356157.png)
 
 通过上面的案例，会发现，不管是GET还是POST请求，在发送的请求参数中如果有中文，在后台接收的时候，都会出现中文乱码的问题。具体该如何解决呢？
+
+
 
 #### 2.4.1 POST请求解决方案
 
@@ -900,6 +914,10 @@ public class RequestDemo4 extends HttpServlet {
   URLDecoder.decode(s,"ISO-8859-1");
   ```
 
+
+
+
+
 ### 2.5 Request请求转发
 
 1. ==请求转发(forward):一种在服务器内部的资源跳转方式。==
@@ -1022,6 +1040,8 @@ public class RequestDemo6 extends HttpServlet {
 * 一次请求，可以在转发资源间使用request共享数据
 
   虽然后台从`/req5`转发到`/req6`，但是这个==只有一次请求==
+  
+  
 
 ## 3，Response对象
 
@@ -1795,59 +1815,3 @@ public class RegisterServlet extends HttpServlet {
 
 4.2 如果用户已经存在，则在页面上展示 `用户名已存在` 的提示信息
 
-### 4.3 SqlSessionFactory工具类抽取
-
-上面两个功能已经实现，但是在写Servlet的时候，因为需要使用Mybatis来完成数据库的操作，所以对于Mybatis的基础操作就出现了些重复代码，如下
-
-```java
-String resource = "mybatis-config.xml";
-InputStream inputStream = Resources.getResourceAsStream(resource);
-SqlSessionFactory sqlSessionFactory = new 
-	SqlSessionFactoryBuilder().build(inputStream);
-```
-
-有了这些重复代码就会造成一些问题:
-
-* 重复代码不利于后期的维护
-* SqlSessionFactory工厂类进行重复创建
-  * 就相当于每次买手机都需要重新创建一个手机生产工厂来给你制造一个手机一样，资源消耗非常大但性能却非常低。所以这么做是不允许的。
-
-那如何来优化呢？
-
-* 代码重复可以抽取工具类
-* 对指定代码只需要执行一次可以使用静态代码块
-
-有了这两个方向后，代码具体该如何编写?
-
-```java
-public class SqlSessionFactoryUtils {
-
-    private static SqlSessionFactory sqlSessionFactory;
-
-    static {
-        //静态代码块会随着类的加载而自动执行，且只执行一次
-        try {
-            String resource = "mybatis-config.xml";
-            InputStream inputStream = Resources.getResourceAsStream(resource);
-            sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public static SqlSessionFactory getSqlSessionFactory(){
-        return sqlSessionFactory;
-    }
-}
-```
-
-工具类抽取以后，以后在对Mybatis的SqlSession进行操作的时候，就可以直接使用
-
-```java
-SqlSessionFactory sqlSessionFactory =SqlSessionFactoryUtils.getSqlSessionFactory();
-```
-
-这样就可以很好的解决上面所说的代码重复和重复创建工厂导
-
-致性能低的问题了。

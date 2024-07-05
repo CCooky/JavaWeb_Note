@@ -299,6 +299,8 @@ public class FilterDemo implements Filter {
 
 比如有如下两个名称的过滤器 ： `BFilterDemo` 和 `AFilterDemo` 。那一定是 `AFilterDemo` 过滤器先执行。
 
+
+
 ### 1.6  案例（看看就行了）
 
 #### 1.6.1  需求
@@ -465,6 +467,8 @@ public class LoginFilter implements Filter {
 }
 ```
 
+
+
 ## 2，Listener
 
 ### 2.1  概述
@@ -517,6 +521,8 @@ public class ContextLoaderListener implements ServletContextListener {
 ```
 
 启动服务器，就可以在启动的日志信息中看到 `contextInitialized()` 方法输出的内容，同时也说明了 `ServletContext` 对象在服务器启动的时候被创建了。
+
+
 
 ## 3，Ajax
 
@@ -957,6 +963,8 @@ axios.post("http://localhost:8080/ajax-demo/axiosServlet","username=zhangsan").t
 })
 ```
 
+
+
 ## 5. JSON
 
 ### 5.1  概述
@@ -1013,6 +1021,8 @@ axios.post("http://localhost:8080/ajax-demo/axiosServlet","username=zhangsan").t
 
 上面两种格式进行对比后就会发现 `json` 格式数据的简单，以及所占的字节数少等优点。所以我们采用JSON的数据格式进行前后端的数据传输，这里就有一个很重要的JSON数据与Java对象之间的转换，下面会慢慢讲到。
 
+
+
 ### 5.2  JSON 语法
 
 #### 5.2.1  定义格式
@@ -1020,7 +1030,7 @@ axios.post("http://localhost:8080/ajax-demo/axiosServlet","username=zhangsan").t
 **`JSON` 本质就是一个字符串**，但是该字符串内容是有一定的格式要求的。 定义格式如下：
 
 ```js
-var 变量名 = '{"key":value,"key":value,...}';
+var 变量名 = ' {"key":value,"key":value,...} ';
 ```
 
 `JSON` 串对于

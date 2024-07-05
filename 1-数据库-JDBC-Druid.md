@@ -1,3 +1,119 @@
+
+
+# 实战案例
+
+预警记录里面存放了桥梁id和监测类型id，返回前端的数据里面需要桥梁名称和监测类型名称。（is_deal=0——表示未处理的预警记录；is_deal=1——表示已经处理过的预警记录）
+
+```sql
+select t1.*,t2.bridge_name,t3.monitor_type_name
+from bridge_alert_record as t1 
+JOIN bridge_manage as t2 on t1.bridge_id=t2.bridge_id and t1.is_deal=1
+JOIN bridge_monitor_type as t3 on t1.monitor_type_id = t3.monitor_type_id;
+```
+
+谷粒学院
+
+```sql
+SELECT *
+from edu_course as ec 
+left join edu_course_description as ecd on ec.id=ecd.id
+LEFT JOIN edu_teacher as et on ec.teacher_id=et.id
+LEFT JOIN edu_subject as es1 on ec.subject_parent_id=es1.id
+LEFT JOIN edu_subject as es2 on ec.subject_id=es2.id
+whree ec.id=?
+```
+
+# MySql函数
+
+## 1. concat
+
+字符串拼接函数，Mybatis中模糊搜索比较多
+
+```sql
+concat('%'+'brand_name'+'%')
+```
+
+
+
+## 2. date_format
+
+日期格式化函数，可以定制化日期格式。
+
+```sql
+update goods_msg SET update_date = DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s') WHERE id = '1111122222';
+-- 对应时间格式2022-2-20 12:30:30
+```
+
+
+
+## 3.ifnull
+
+`IFNULL()`函数用于处理空值（NULL）情况。它接受两个参数，如果第一个参数不为空，则返回第一个参数的值；如果第一个参数为空，则返回第二个参数的值。
+
+语法如下：
+
+```sql
+IFNULL(expression, value)
+```
+
+- `expression` 是需要检查是否为空的**表达式**、**列**（两者都会用到哦）
+- `value` 是在 `expression` 为空时返回的值。
+
+下面是一个示例，展示了如何使用`IFNULL()`函数：
+
+```sql
+SELECT column1, IFNULL(column2, 'N/A') AS column2_modified
+FROM table;
+```
+
+上述语句从名为`table`的表中选择`column1`列，并使用`IFNULL()`函数将`column2`列中的空值替换为字符串'N/A'。结果集将包含`column1`列的原始值以及修改后的`column2_modified`列。
+
+这个函数在处理可能存在空值的情况下非常有用，可以提供一个默认值或指定一个替代值，以避免在结果中出现空值。
+
+
+
+## 4.ROUND
+
+在MySQL中，`ROUND()`函数用于对一个数值进行四舍五入。
+
+语法如下：
+
+```
+ROUND(number, decimals)
+```
+
+其中：
+
+- `number` 是要进行四舍五入的数值。
+- `decimals` 是可选参数，表示要保留的小数位数。如果不指定 `decimals`，则默认为 0，表示对整数进行四舍五入。
+
+
+
+## 5.union
+
+`UNION`操作符用于合并两个或多个`SELECT`语句的结果集，并将它们作为一个结果返回。
+
+它可以用于合并具**有相同列结构**的多个查询结果。
+
+`UNION`操作符的基本语法如下：
+
+```sql
+SELECT column1, column2, ...
+FROM table1
+UNION
+SELECT column1, column2, ...
+FROM table2;
+```
+
+注意以下几点：
+
+- `UNION`操作符连接两个或多个`SELECT`语句，并将它们的结果合并成一个结果集。
+- `SELECT`语句中的**列数**和**数据类型**必须相同或兼容。
+- 结果集中的**列名将由**第一个`SELECT`语句的列名确定。
+- `UNION`操作符默认会去重，即去除重复的行。如果想保留重复行，**可以使用`UNION ALL`操作符。**
+
+
+
 # 数据库字段名与Java变量名
 
 - **数据库**
@@ -14,6 +130,8 @@
   ```
 
 在定义实体类与数据库表对应的时候，需要注意哦
+
+
 
 # 数据库相关概念
 
@@ -56,7 +174,7 @@
 - SQLite：嵌入式的微型数据库。如：作为 Android 内置数据库
 - MariaDB：开源免费中小型的数据库
 
-这么多的管理系统，怎么学的完呢，对不对？，所以我们统一了一门编程语言（SQL）来操作所有的DBMS。整理一下，**用户、DBMS、DB的关系**，如下：
+==这么多的管理系统，怎么学的完呢，对不对？，所以我们统一了一门编程语言（SQL）来操作所有的DBMS。整理一下，**用户、DBMS、DB的关系**，如下：==
 
 <img src="images/image-20220124214718322.png" alt="image-20220124214718322" style="zoom:80%;" />
 
@@ -67,7 +185,7 @@
 - **英文：Structured Query Language，简称 SQL，结构化查询语言**
 - 操作关系型数据库的编程语言
 - 定义操作所有关系型数据库的统一标准，可以使用SQL操作所有的关系型数据库管理系统，以后工作中如果使用到了其他的数据库管理系统，也同样的使用SQL来操作。
-- 大部分数据库管理系统的sql语句都是一样的，但是也存在部分的需求，它的语法规则不一样，这种我们称为——数据库管理系统的方言。
+- ==大部分数据库管理系统的sql语句都是一样的，但是也存在部分的需求，它的语法规则不一样，这种我们称为——数据库管理系统的方言。==
 
 # MYSQL
 
@@ -128,7 +246,7 @@ double	:浮点类型
 						eg ： score double(5,2)
 ```
 
-### 日期
+### 日期（引号包裹）
 
 ```sql
 date			:日期值。只包含年月日 
@@ -136,7 +254,7 @@ date			:日期值。只包含年月日
 datetime	:混合日期和时间值。包含"年-月-日-时-分-秒"
 ```
 
-### 字符串
+### 字符串（引号包裹）
 
 ```sql
 char		:定长字符串。 
@@ -157,7 +275,7 @@ varchar	:变长字符串。
 
 ## 通用语法
 
-- **SQL 语句可以单行或多行书写，以分号结尾，并且一条sql语句，内部是使用逗号 ， 进行分割，内部的最后部分不要加逗号，哦**。注意哦，cmd命令窗口是不要加分号的。
+- **SQL 语句可以单行或多行书写，以分号结尾，并且一条sql语句，内部是使用逗号 ， 进行分割，内部的最后部分不要加逗号，哦**。
 
   ```sql
   show databases;
@@ -169,6 +287,10 @@ varchar	:变长字符串。
   Show DataBases;
   ```
 
+- **SQL内不严格区分单引号、双引号，都可以**；
+
+- **如果想表达某个字符串内部还有引号，**则采用外部双引号+内部单引号，或，外部单引号+内部双引号。
+
 - **单行注释：**     **-- 注释内容** 或   **#注释内容**(MySQL 特有)【注意：--后面一定加空格，#没有要求】
 
   ```sql
@@ -177,6 +299,8 @@ varchar	:变长字符串。
   ```
 
 - **多行注释：**   /*  注释  */
+
+
 
 ## SQL分类
 
@@ -227,7 +351,7 @@ varchar	:变长字符串。
 
 ### DDL：操作表
 
-操作表也就是对表进行增（Create）删（Retrieve）改（Update）查（Delete）。
+操作表也就是对**表**进行增（Create）删（Retrieve）改（Update）查（Delete）。
 
 1. **查询当前数据库下所有表名称**
 
@@ -446,7 +570,7 @@ SELECT DISTINCT 字段列名 FROM 表名;
 - **起别名**
 
 ```sql
-AS: AS 
+AS
 中间的冒号：也可以省略,但不建议省略，这样可读性强
 # select name,math as 数学成绩,english as 英文成绩 from stu;
 ```
@@ -454,7 +578,7 @@ AS: AS
 #### 条件查询
 
 ```sql
-SELECT 字段列表 FROM 表名 WHERE 条件列表;
+SELECT 字段列表 FROM 表名 WHERE 条件列表;  多个条件用 and（&&），or（||）
 ```
 
 其中，条件列表可以使用以下运算符：
@@ -527,7 +651,7 @@ select * from stu where name like "%德%";
 #### 排序查询
 
 ```sql
-SELECT 字段列表 FROM 表名 ORDER BY 排序字段名1 [排序方式1],排序字段名2 [排序方式2] …;
+SELECT 字段列表 FROM 表名 ORDER BY 排序字段名1 [排序方式1], 排序字段名2 [排序方式2] …;
 ```
 
 上述语句中的排序方式有两种，分别是：
@@ -563,7 +687,7 @@ SELECT 字段列表 FROM 表名 ORDER BY 排序字段名1 [排序方式1],排序
 
 <img src="images/image-20220125194910688.png" alt="image-20220125194910688" style="zoom:80%;" />
 
-**语法：**	**特别特别注意：null 值不参与所有聚合函数运算**
+**语法：**	==**特别注意：null 值不参与所有聚合函数运算**==
 
 ```sql
 SELECT  聚合函数名(列名)  FROM 表;
@@ -596,12 +720,13 @@ select count(id) from stu;
 ##### **语法**
 
 ```sql
-SELECT 字段列表 FROM 表名 [WHERE 分组前条件限定] GROUP BY 分组字段名 [HAVING 分组后条件过滤]; 
+SELECT 字段列表 FROM 表名 [WHERE 分组前条件限定] GROUP BY 分组字段名 [HAVING 分组后条件限制]; 
 ```
 
-**注意：分组之后，查询的字段（即上面的字段列表）为聚合函数和该分组的字段，查询其他字段无任何意义。**
+- **注意：查询的字段（即上面的字段列表）只能为==聚合函数（可以为任意字段）==和该==分组的字段==，查询其他字段无任何意义。**
 
-where 就是前面的条件查询语句。having后面的除了条件查询语句写法，还可以写聚合函数。
+- where 就是前面的条件查询语句。having后面的除了条件查询语句写法，还可以写聚合函数。
+
 
 **where和having的区别**
 
@@ -645,19 +770,44 @@ select sex,avg(math) from stu group by sex;
   select sex,avg(math),COUNT(*) from stu where math >= 70 GROUP BY sex HAVING count(*)>2;
   ```
 
+##### 多个字段
+
+可以使用多个字段对结果进行分组查询。**通过在`GROUP BY`子句中指定多个字段，可以按照这些字段的组合进行分组。**
+
+以下是使用两个分组字段的示例：
+
+<img src="images/image-20230708211019468.png" alt="image-20230708211019468" style="zoom:80%;" />
+
+```sql
+select student_id,subject_name,count(*)
+from examinations
+GROUP BY student_id, subject_name;
+```
+
+上述查询将从名为`examinations`的表中选择`student_id`和`subject_name`列，并按照**这两个字段的组合**进行分组。`COUNT(*)`用于计算每个组中的行数。
+
+<img src="images/image-20230708211538883.png" alt="image-20230708211538883" style="zoom:80%;" />
+
+
+
 #### 分页查询
 
 ```sql
-SELECT 字段列表 FROM 表名 LIMIT 起始索引 , 查询条目数;
+SELECT 字段列表 FROM 表名 LIMIT 起始索引 , 每页条目数; # 包含起始索引，数据从0开始记录
 ```
 
-其中起始索引是从0开始，他是mysql内部它自己标示每一条数据的索引（我们是看不见的）；查询条目就是每一页你要显示的数据个数。
+- ==其中起始索引是从0开始，他是mysql内部它自己标示每一条数据的索引（我们是看不见的）；==
+- 查询条目就是每一页你要显示的数据个数。
 
 所以说：当我们需要查询第三页的数据，每页显示3条时，应该怎么写呢：
 
 ```sql
 select * from stu limit 6,3;
+
+select * from stu limit (pageNum-1), pageSize;
 ```
+
+
 
 # Navicat的简单使用
 
@@ -703,19 +853,19 @@ select * from stu limit 6,3;
 
   ​		添加约束可以在添加数据的时候就限制不正确的数据，年龄是3000，数学成绩是-5分这样无效的数据，继而保障数据的完整性。
 
-### 1.2 约束的分类
+### 1.2 约束的分类（DDL）
 
 1. **非空约束： 关键字是 NOT NULL**
 
-   保证列中所有的数据不能有null值。
+   ​		保证列中所有的数据不能有null值。
 
 2. **唯一约束：关键字是  UNIQUE**
 
-   保证该列中所有数据各不相同。
+   ​		保证该列中所有数据各不相同。
 
-3. **主键约束： 关键字是  PRIMARY KEY**
+3. **主键约束： 关键字是  PRIMARY KEY** = not null + unique
 
-   主键是一行数据的唯一标识，非空且唯一。一张表只能有一个主键。
+   ​		主键是一行数据的唯一标识，非空且唯一。一张表只能有一个主键。
 
 4. **检查约束： 关键字是  CHECK** 
 
@@ -723,7 +873,7 @@ select * from stu limit 6,3;
 
    例如：我们可以给age列添加一个范围，最低年龄可以设置为1，最大年龄就可以设置为300，这样的数据才更合理些。
 
-   > 注意：MySQL不支持检查约束。
+   > ==注意：MySQL不支持检查约束。==
    >
    > 这样是不是就没办法保证年龄在指定的范围内了？从数据库层面不能保证，以后可以在java代码中进行限制，一样也可以实现要求。
 
@@ -735,11 +885,13 @@ select * from stu limit 6,3;
 
 6. **外键约束： 关键字是  FOREIGN KEY**
 
-   外键用来让两个表的数据之间建立链接，保证数据的一致性和完整性。后面我们会重点进行讲解。
+   ​		外键用来让两个表的数据之间建立链接，保证数据的一致性和完整性。后面我们会重点进行讲解。
 
 7. **额外介绍一个：自动增长,     关键字：AUTO_INCREMENT**
 
-   只有当该字段的数据为数字类型，且唯一的时候，才可以加这个约束。作用是：当我们插入数据时，该字段数据为null，他就会按照数据插入库的顺序去给字段添加值。
+   ​		只有当该字段的数据为数字类型，且唯一的时候，才可以加这个约束。
+   
+   ​		作用是：当我们插入数据时，==该字段数据为null==，他就会按照数据插入库的顺序去给字段添加值。
 
 ### 1.3 非空约束
 
@@ -762,7 +914,7 @@ select * from stu limit 6,3;
   ALTER TABLE 表名 MODIFY 字段名 数据类型 NOT NULL;
   ```
 
-- 删除约束
+- 删除约束==（只有这里是modify、其他的是drop）==
 
   ```sql
   ALTER TABLE 表名 MODIFY 字段名 数据类型;
@@ -799,7 +951,7 @@ select * from stu limit 6,3;
 - 删除约束
 
   ```sql
-  ALTER TABLE 表名 DROP INDEX 唯一约束字段名;
+  ALTER TABLE 表名 DROP INDEX 约束字段名;
   --
   alter table stu drop index id;
   ```
@@ -862,7 +1014,152 @@ select * from stu limit 6,3;
   ALTER TABLE 表名 ALTER 列名 DROP DEFAULT;
   ```
 
-### 1.7 外键约束（重点）
+
+
+
+
+### 1.7  约束练习
+
+**根据需求，为表添加合适的约束**
+
+```sql
+-- 员工表
+CREATE TABLE emp (
+	id INT,  -- 员工id，主键且自增长
+    ename VARCHAR(50), -- 员工姓名，非空且唯一
+    joindate DATE,  -- 入职日期，非空
+    salary DOUBLE(7,2),  -- 工资，非空
+    bonus DOUBLE(7,2)  -- 奖金，如果没有将近默认为0
+);
+```
+
+上面一定给出了具体的要求，我们可以根据要求创建这张表，并为每一列添加对应的约束。建表语句如下：
+
+```sql
+DROP TABLE IF EXISTS emp;
+
+-- 员工表
+CREATE TABLE emp (
+  id INT PRIMARY KEY, -- 员工id，主键且自增长
+  ename VARCHAR(50) NOT NULL UNIQUE, -- 员工姓名，非空并且唯一
+  joindate DATE NOT NULL , -- 入职日期，非空
+  salary DOUBLE(7,2) NOT NULL , -- 工资，非空
+  bonus DOUBLE(7,2) DEFAULT 0 -- 奖金，如果没有奖金默认为0
+);
+```
+
+通过上面语句可以创建带有约束的 `emp` 表，约束能不能发挥作用呢。接下来我们一一进行验证，先添加一条没有问题的数据
+
+```sql
+INSERT INTO emp(id,ename,joindate,salary,bonus) values(1,'张三','1999-11-11',8800,5000);
+```
+
+* **验证主键约束，非空且唯一**
+
+```sql
+INSERT INTO emp(id,ename,joindate,salary,bonus) values(null,'张三','1999-11-11',8800,5000);
+```
+
+执行结果如下：
+
+<img src="images/image-20210724114548170.png" alt="image-20210724114548170" style="zoom:80%;" />
+
+从上面的结果可以看到，字段 `id` 不能为null。那我们重新添加一条数据，如下：
+
+```sql
+INSERT INTO emp(id,ename,joindate,salary,bonus) values(1,'张三','1999-11-11',8800,5000);
+```
+
+执行结果如下：
+
+<img src="images/image-20210724114805350.png" alt="image-20210724114805350" style="zoom:80%;" />
+
+从上面结果可以看到，1这个值重复了。所以主键约束是用来限制数据非空且唯一的。那我们再添加一条符合要求的数据
+
+```sql
+INSERT INTO emp(id,ename,joindate,salary,bonus) values(2,'李四','1999-11-11',8800,5000);
+```
+
+执行结果如下：
+
+<img src="images/image-20210724115024106.png" alt="image-20210724115024106" style="zoom:80%;" />
+
+* **验证非空约束**
+
+```sql
+INSERT INTO emp(id,ename,joindate,salary,bonus) values(3,null,'1999-11-11',8800,5000);
+```
+
+执行结果如下：
+
+<img src="images/image-20210724115149415.png" alt="image-20210724115149415" style="zoom:80%;" />
+
+从上面结果可以看到，`ename` 字段的非空约束生效了。
+
+* **验证唯一约束**
+
+```sql
+INSERT INTO emp(id,ename,joindate,salary,bonus) values(3,'李四','1999-11-11',8800,5000);
+```
+
+执行结果如下：
+
+<img src="images/image-20210724115336916.png" alt="image-20210724115336916" style="zoom:80%;" />
+
+从上面结果可以看到，`ename` 字段的唯一约束生效了。
+
+* **验证默认约束**
+
+```sql
+INSERT INTO emp(id,ename,joindate,salary) values(3,'王五','1999-11-11',8800);
+```
+
+执行完上面语句后查询表中数据，如下图可以看到王五这条数据的bonus列就有了默认值0。
+
+<img src="images/image-20210724115547951.png" alt="image-20210724115547951" style="zoom:80%;" />
+
+==注意：默认约束只有在不给值时才会采用默认值。如果给了null，那值就是null值。==
+
+如下：
+
+```sql
+INSERT INTO emp(id,ename,joindate,salary,bonus) values(4,'赵六','1999-11-11',8800,null);
+```
+
+执行完上面语句后查询表中数据，如下图可以看到赵六这条数据的bonus列的值是null。
+
+<img src="images/image-20210724115826516.png" alt="image-20210724115826516" style="zoom:80%;" />
+
+* **验证自动增长： auto_increment  当列是数字类型 并且唯一约束**
+
+重新创建 `emp` 表，并给id列添加自动增长
+
+```sql
+-- 员工表
+CREATE TABLE emp (
+  id INT PRIMARY KEY auto_increment, -- 员工id，主键且自增长
+  ename VARCHAR(50) NOT NULL UNIQUE, -- 员工姓名，非空并且唯一
+  joindate DATE NOT NULL , -- 入职日期，非空
+  salary DOUBLE(7,2) NOT NULL , -- 工资，非空
+  bonus DOUBLE(7,2) DEFAULT 0 -- 奖金，如果没有奖金默认为0
+);
+```
+
+接下来给emp添加数据，分别验证不给id列添加值以及给id列添加null值，id列的值会不会自动增长：
+
+```sql
+INSERT INTO emp(ename,joindate,salary,bonus) values('赵六','1999-11-11',8800,null);
+INSERT INTO emp(id,ename,joindate,salary,bonus) values(null,'赵六2','1999-11-11',8800,null);
+INSERT INTO emp(id,ename,joindate,salary,bonus) values(null,'赵六3','1999-11-11',8800,null);
+```
+
+
+
+
+
+
+
+### 1.8 外键约束（重点）
 
 **关键字是  FOREIGN KEY**， 外键用来让两个表的数据之间建立链接，保证数据的一致性和完整性。
 
@@ -876,9 +1173,9 @@ select * from stu limit 6,3;
 
 第一步：你要分清哪一个是主表，即主表在逻辑层面上包含了从表。在这里，dept部门表是主表，每个部门下的员工在emp表中。
 
-第二步：外键应该是添加到从表里面，为什么呢，因为按照逻辑，我是先有了部门，再有的员工，员工应该挂在部门下面，懂了吧，所以说外键应该在从表里面加上，是从表指向了主表。
+第二步：**外键是添加到从表里面**，为什么呢，因为按照逻辑，我是先有了部门，再有的员工，员工应该挂在部门下面，懂了吧，所以说**外键应该在从表里面加上，是从表指向了主表。**
 
-第三步：有了上面的思维，在创建表的时候，应该是先创建主表，再创建从表；添加数据的时候也是一样，先插入主表的，然后插入从表。
+第三步：有了上面的思维，在创建表的时候，应该是**先创建主表，再创建从表**；添加数据的时候也是一样，**先插入主表的，然后插入从表。**
 
 效果：只有当从表中的对应数据全部删除后，才可以删除主表里面的数据。以上面的例子说：想要删除dept表里面研发部这条数据，只有当员工表里面的1、2、3号员工（都是研发部的）全部删除了后，才可以删除研发部。
 
@@ -962,6 +1259,10 @@ INSERT INTO emp (NAME, age, dep_id) VALUES
 
 <img src="images/image-20220126221626953.png" alt="image-20220126221626953" style="zoom:67%;" />
 
+
+
+
+
 ## 2. 数据库设计
 
 ### 2.1 概述
@@ -984,7 +1285,7 @@ INSERT INTO emp (NAME, age, dep_id) VALUES
 
 * 逻辑分析（通过ER图对数据库进行逻辑建模，不需要考虑我们所选用的数据库管理系统）
 
-  如下图就是ER(Entity/Relation)图：（现在已经不需要画这个了，Mysql那个模型转换功能就可以看见）
+  如下图就是==ER(Entity/Relation)图==：（现在已经不需要画这个了，Mysql那个模型转换功能就可以看见）
 
 <img src="images/image-20220126210624242.png" alt="image-20220126210624242" style="zoom:80%;" />
 
@@ -1218,7 +1519,7 @@ select * from emp , dept;  -- 从emp和dept表中查询所有的字段数据
 
 <img src="images/image-20220127154231849.png" alt="image-20220127154231849" style="zoom:80%;" />
 
-发现问题：每个emp表里面的员工，分别对dept表里面的每个部门都连起来了，出现的原因在于——笛卡尔积：对于A，B两个集合，当进行拼接的时候，取A，B所有的组合情况。
+发现问题：每个emp表里面的员工，分别对dept表里面的每个部门都连起来了，==出现的原因在于——笛卡尔积==：对于A，B两个集合，当进行拼接的时候，取A，B所有的组合情况。
 
 解决办法：在查询后面加一个条件，查询员工表里的dep_id等于部门表的id的数据。
 
@@ -1242,9 +1543,9 @@ select * from emp , dept where emp.dep_id = dept.did;
 
 ​			**外连接查询**
 
-​					左外连接查询 ：相当于查询A表所有数据和交集部分数据
+​					左外连接查询 ：相当于查询A表所有数据和交集部分数据（A+A&B）
 
-​					右外连接查询 ： 相当于查询B表所有数据和交集部分数据
+​					右外连接查询 ： 相当于查询B表所有数据和交集部分数据（A&B+B）
 
 - **子查询**
 
@@ -1270,7 +1571,7 @@ SELECT 字段列表 FROM 表1 [INNER] JOIN 表2 ON 条件;
 
 ```sql
 -- 隐式内连接
-select emp.*,dept.* from emp,dept; -- 可以简写成下面这种
+select emp.*,dept.* from emp,dept where emp.dep_id = dept.did;; -- 可以简写成下面这种
 select * from emp , dept where emp.dep_id = dept.did;
 
 select emp.NAME,emp.age,dept.dep_name 
@@ -1332,6 +1633,8 @@ SELECT 字段列表 FROM 表1 RIGHT [OUTER] JOIN 表2 ON 条件;
 
 <img src="images/image-20220127151735664.png" alt="image-20220127151735664" style="zoom:67%;" />
 
+
+
 ### 3.3 子查询
 
 ==查询中嵌套查询，称嵌套查询为子查询。==
@@ -1367,6 +1670,8 @@ select * from emp where salary > (select salary from emp where name = '猪八戒
   - 子查询语句结果是==多行单列==，子查询语句作为条件值，使用 in 等关键字进行条件判断
   - 子查询语句结果是==多行多列==，子查询语句作为虚拟表，虚拟表要加（）哦
 
+  
+  
 - **案例**
 
 需求1：查询 '财务部' 和 '市场部' 所有的员工信息。
@@ -1378,7 +1683,7 @@ select did from dept where dname in ("财务部","市场部");
 select *from emp where dep_id in (select did from dept where dname in ("财务部","市场部"));
 ```
 
-需求2：查询入职日期是 '2011-11-11' 之后的员工信息和部门信息
+需求2：查询入职日期是 '2011-11-11' 之后的员工，他的信息和部门信息
 
 ```sql
 -- 实现方式1, 多行单列
@@ -1579,16 +1884,7 @@ WHERE
 
 <img src="images/image-20220127173401159.png" alt="image-20220127173401159" style="zoom:80%;" />
 
-### 3.5 桥梁开发案例
 
-预警记录里面存放了桥梁id和监测类型id，返回前端的数据里面需要桥梁名称和监测类型名称。（is_deal=0——表示未处理的预警记录；is_deal=1——表示已经处理过的预警记录）
-
-```sql
-select t1.*,t2.bridge_name,t3.monitor_type_name
-from bridge_alert_record as t1 
-JOIN bridge_manage as t2 on t1.bridge_id=t2.bridge_id and t1.is_deal=1
-JOIN bridge_monitor_type as t3 on t1.monitor_type_id = t3.monitor_type_id;
-```
 
 
 
@@ -1695,14 +1991,14 @@ set @@autocommit = 0;
 ### 4.3 事务的四大特征
 
 * 原子性（**A**tomicity）: 事务是不可分割的最小操作单位，要么同时成功，要么同时失败
-
 * 一致性（**C**onsistency） :事务完成时，必须使所有的数据都保持一致状态
-
 * 隔离性（**I**solation） :多个事务之间，操作的可见性
-
 * 持久性（**D**urability） :事务一旦提交或回滚，它对数据库中的数据的改变就是永久的
 
-  **ACID**
+
+
+
+
 
 # JDBC
 
@@ -2007,7 +2303,7 @@ public class JDBCDemo3_Connection {
 
 ### 3.3 Statement接口
 
-前面我们通过Connection里面的createStatement方法获取了Statement对象（多态），然后这个接口是用来执行SQL语句的，有下面两种方法：在学习数据库的时候我们也了解了，数据库的查询都是单独拿出来的，因为他的返回结果比较特殊。所以说我们这里也是分了两种。
+前面我们通过Connection里面的createStatement方法获取了Statement对象（多态），然后这个接口是==用来执行SQL语句的==，有下面两种方法：在学习数据库的时候我们也了解了，数据库的查询都是单独拿出来的，因为他的返回结果比较特殊。所以说我们这里也是分了两种。
 
 - **执行DDL、DML语句的方法**
 
@@ -2026,6 +2322,8 @@ ResultSet  executeQuery(sql)：执行DQL 语句，返回 ResultSet 对象
 ```
 
 该方法涉及到了 `ResultSet` 对象，我们首先了解ResultSet对象。重点
+
+
 
 #### 3.3.1 ResultSet
 
@@ -2137,6 +2435,8 @@ public interface PreparedStatement extends Statement
 
 对上面的作用中SQL注入问题大家肯定不理解。那我们先对SQL注入进行说明.
 
+
+
 #### 3.4.1 SQL注入
 
 > SQL注入是通过操作输入来修改事先定义好的SQL语句，用以达到执行代码对服务器进行攻击的方法。
@@ -2179,6 +2479,8 @@ create database test;
 <img src="images/image-20210725185603112.png" alt="image-20210725185603112" style="zoom:80%;" />
 
 这就是SQL注入漏洞，也是很危险的。当然现在市面上的系统都不会存在这种问题了，所以大家也不要尝试用这种方式去试其他的系统。
+
+
 
 **解决办法：将SQL执行对象 `Statement` 换成 `PreparedStatement` 对象。**
 
@@ -2283,10 +2585,10 @@ public void testPreparedStatement() throws  Exception {
 
     // 接收用户输入 用户名和密码
     String name = "zhangsan";
-    String pwd = "' or '1' = '1";
+    String pwd = " ' ' or '1' = '1' ";
 
     // 定义sql
-    String sql = "select * from tb_user where username = ? and password = ?";
+    String sql = "select * from tb_user where username = ? and password = ? ";
     // 获取pstmt对象
     PreparedStatement pstmt = conn.prepareStatement(sql);
     // 设置？的值
@@ -2309,8 +2611,10 @@ public void testPreparedStatement() throws  Exception {
 
 执行上面语句就可以发现不会出现SQL注入漏洞问题了。那么PreparedStatement又是如何解决的呢？它是将特殊字符进行了转义，转义的SQL如下：
 
+用户名随意写，密码写成 `' or '1' ='1`
+
 ```java
-select * from tb_user where username = 'sjdljfld' and password = '\'or \'1\' = \'1'
+select * from tb_user where username = 'sjdljfld' and password = '\' or \'1\' = \'1'
 ```
 
 #### 3.4.4 执行原理
@@ -2530,7 +2834,7 @@ public void testPreparedStatement2() throws  Exception {
 
 * 它允许应用程序重复使用一个现有的数据库连接，而不是再重新建立一个；
 
-* 它可以释放空闲时间超过最大空闲时间的数据库连接来避免因为没有释放数据库连接而引起的数据库连接遗漏。”这个就类似游戏里面，您过长时间没有活动，已经掉线哈哈哈“
+* 它可以释放空闲时间超过最大空闲时间的数据库连接来避免因为没有释放数据库连接而引起的数据库连接遗漏。==”这个就类似游戏里面，您过长时间没有活动，已经掉线哈哈哈“==
 * 好处
   * 资源重用
   * 提升系统响应速度
@@ -2538,7 +2842,9 @@ public void testPreparedStatement2() throws  Exception {
 
 <img src="images/image-20220128162105153.png" alt="image-20220128162105153" style="zoom:80%;" />
 
-他是这样的：连接池是在一开始就创建好了一些连接（Connection）对象存储起来。用户需要连接数据库时，不需要自己创建连接，而只需要从连接池中获取一个连接进行使用，使用完毕后再将连接对象归还给连接池；
+==他是这样的：连接池是在一开始就创建好了一些连接（Connection）对象存储起来。用户需要连接数据库时，不需要自己创建连接，而只需要从连接池中获取一个连接进行使用，使用完毕后再将连接对象归还给连接池；==
+
+
 
 ## 2. 数据库连接池接口
 
@@ -2620,6 +2926,8 @@ public class DruidDemo {
     }
 }
 ```
+
+
 
 # JDBC+Druid小结
 
@@ -3078,23 +3386,4 @@ public class Brand {
 ```
 
 # 后面学习Maven&Mybatis
-
-# PS：MySql函数
-
-## 1. concat
-
-字符串拼接函数，Mybatis中模糊搜索比较多
-
-```sql
-concat('%'+'brand_name'+'%')
-```
-
-## 2. date_format
-
-日期格式化函数，可以定制化日期格式。
-
-```sql
-update goods_msg SET update_date = DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s') WHERE id = '1111122222';
--- 对应时间格式2022-2-20 12:30:30
-```
 
